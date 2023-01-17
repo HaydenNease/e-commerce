@@ -6,8 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
+    "db:seed": "node seeds/index.js",
+    "db:sync": "node db/sync",
+    "env:copy": "cp .env.EXAMPLE .env",
     "watch": "nodemon server.js",
-    "seed": "node seeds/index.js"
+    "setup": "npm i && npm run env:copy && npm run db:sync && npm run db:seed && npm run watch"
   },
   "repository": {
     "type": "git",
