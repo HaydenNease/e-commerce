@@ -9,8 +9,9 @@ router.get('/', async (req, res) => {
   try {
     const tagData = await Tag.findAll({
       include: [{
-        model: Product
-      }]
+        model: Product,
+        through: Tag,
+      }],
     });
     res.json(tagData);
   } catch (err) {
@@ -49,14 +50,13 @@ router.put('/:id', async (req, res) => {
         id: req.params.id,
       }
     });
-    res.json(tagData);
     if (!tagData[0]) {
-      res.status(404).json({ message: 'No data found with that id!' });
+      res.status(404).json({ message: 'Update Unsuccessful' });
       return;
     }
     res.status(200).json(tagData);
   } catch (err) {
-    res.status(500).json(err);
+    console.log(err);
   }
 });
 
